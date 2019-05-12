@@ -1,14 +1,16 @@
-// Package Import
 const express = require('express');
+const controllers = require('./app/controllers');
+
+// Middleware Imports
+const { validateToken } = require('./app/middlewares/auth');
 
 // Controller Imports
-const UserController = require('./app/controllers/UserController');
-const SessionController = require('./app/controllers/SessionController');
+const { UserController, SessionController } = controllers;
 
 // Router instance
 const routes = express.Router();
 
-routes.get('/', (req, res) => res.json({
+routes.get('/', validateToken, (req, res) => res.json({
   message: 'hello world',
 }));
 
