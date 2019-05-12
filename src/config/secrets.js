@@ -4,4 +4,8 @@ module.exports.secrets = {
     name: 'gonode',
     password: 'password',
   },
+  auth: {
+    key: 'key',
+    expiresIn: 86400,
+  },
 };

@@ -5,7 +5,7 @@ class UserController {
     const { email } = req.body;
     if (await User.findOne({ email })) {
       return res.status(400).json({
-        error: 'E-mail já cadastrado',
+        error: 'E-mail already in use',
       });
     }
     const user = await User.create(req.body);
