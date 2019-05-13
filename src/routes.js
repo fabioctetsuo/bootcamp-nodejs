@@ -5,7 +5,9 @@ const controllers = require('./app/controllers');
 const { validateToken } = require('./app/middlewares/auth');
 
 // Controller Imports
-const { UserController, SessionController, AdController } = controllers;
+const {
+  UserController, SessionController, AdController, PurchaseController,
+} = controllers;
 
 // Router instance
 const routes = express.Router();
@@ -21,5 +23,7 @@ routes.get('/ads/:id', AdController.show);
 routes.post('/ads', AdController.store);
 routes.put('/ads/:id', AdController.update);
 routes.delete('/ads/:id', AdController.destroy);
+
+routes.post('/purchases', PurchaseController.store);
 
 module.exports = routes;
