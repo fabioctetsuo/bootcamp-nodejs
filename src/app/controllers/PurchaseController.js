@@ -11,7 +11,8 @@ class PurchaseController {
       from: '"Fabio Tetsuo" <fabioctetsuo@gmail.com>',
       to: purchaseAd.author.email,
       subject: `Solitação de Compra: ${purchaseAd.title}`,
-      html: `<p>Teste: ${content}</p>`,
+      template: 'purchase',
+      context: { user, content, ad: purchaseAd },
     });
     return res.send();
   }
