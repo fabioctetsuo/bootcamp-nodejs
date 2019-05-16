@@ -1,5 +1,6 @@
 const express = require('express');
 const validate = require('express-validation');
+const handle = require('express-async-handler');
 const controllers = require('./app/controllers');
 const validators = require('./app/validators');
 
@@ -18,18 +19,18 @@ const {
 // Router instance
 const routes = express.Router();
 
-routes.post('/users', validate(User), UserController.store);
-routes.post('/sessions', validate(Session), SessionController.store);
+routes.post('/users', validate(User), handle(UserController.store));
+routes.post('/sessions', validate(Session), handle(SessionController.store));
 
 // All routes above the following line will use valida token middleware
 routes.use(validateToken);
 
-routes.get('/ads', AdController.index);
-routes.get('/ads/:id', AdController.show);
-routes.post('/ads', validate(Ad), AdController.store);
-routes.put('/ads/:id', validate(Ad), AdController.update);
-routes.delete('/ads/:id', AdController.destroy);
+routes.get('/ads', handle(AdController.index));
+routes.get('/ads/:id', handle(AdController.show));
+routes.post('/ads', validate(Ad), handle(AdController.store));
+routes.put('/ads/:id', validate(Ad), handle(AdController.update));
+routes.delete('/ads/:id', handle(AdController.destroy));
 
-routes.post('/purchases', validate(Purchase), PurchaseController.store);
+routes.post('/purchases', validate(Purchase), handle(PurchaseController.store));
 
 module.exports = routes;

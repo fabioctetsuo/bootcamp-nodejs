@@ -2,10 +2,10 @@ module.exports.secrets = {
   database: {
     project: 'gonode',
     name: 'gonode',
-    password: 'password',
+    password: 'teste',
   },
   auth: {
-    key: 'key',
+    key: 'GoNode03',
     expiresIn: 86400,
   },
   mailer: {
@@ -13,8 +13,8 @@ module.exports.secrets = {
     port: 2525,
     secure: false,
     auth: {
-      user: 'user',
-      pass: 'pass',
+      user: '9ad0c8f1cc51d7',
+      pass: '482a353c4bd53f',
     },
   },
   redis: {
