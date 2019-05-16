@@ -2,9 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { ValidationError } = require('express-validation');
 const Youch = require('youch');
+const Sentry = require('@sentry/node');
 
 const databaseConfig = require('./config/database');
 const routes = require('./routes');
+const { secrets: { sentry } } = require('./config/secrets');
 
 class App {
   constructor() {
@@ -12,10 +14,15 @@ class App {
     this.isDev = process.env.NODE_ENV !== 'production';
 
     // Inicialiando configuração de middlewares, views e rotas
+    this.sentry();
     this.database();
     this.middlewares();
     this.routes();
     this.exception();
+  }
+
+  sentry() {
+    Sentry.init(sentry);
   }
 
   database() {
@@ -27,6 +34,7 @@ class App {
 
   middlewares() {
     this.express.use(express.json());
+    this.express.use(Sentry.Handlers.requestHandler());
   }
 
   routes() {
@@ -34,7 +42,10 @@ class App {
   }
 
   exception() {
-    this.express.use(async (error, req, res, next) => {
+    if (process.env.NODE_ENV === 'prodution') {
+      this.express.use(Sentry.Handlers.errorHandler());
+    }
+    this.express.use(async (error, req, res, next) => { //eslint-disable-line
       const status = error.status ? error.status : 500;
       if (error instanceof ValidationError) {
         return res.status(status).json(error);

@@ -21,4 +21,7 @@ module.exports.secrets = {
     host: '127.0.0.1',
     port: 6379,
   },
+  sentry: {
+    dsn: 'https://50898cb3113f44baab1315713e145b9a@sentry.io/1460686',
+  },
 };

@@ -39,7 +39,6 @@ class AdController {
   }
 
   async store(req, res) {
-    throw new Error();
     const { body, userId } = req;
     const ad = await Ad.create({ ...body, author: userId });
     return res.status(201).json(ad);
