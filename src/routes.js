@@ -9,7 +9,11 @@ const { validateToken } = require('./app/middlewares/auth');
 
 // Controller Imports
 const {
-  UserController, SessionController, AdController, PurchaseController,
+  UserController,
+  SessionController,
+  AdController,
+  PurchaseController,
+  AcquisitionController,
 } = controllers;
 
 const {
@@ -32,5 +36,7 @@ routes.put('/ads/:id', validate(Ad), handle(AdController.update));
 routes.delete('/ads/:id', handle(AdController.destroy));
 
 routes.post('/purchases', validate(Purchase), handle(PurchaseController.store));
+
+routes.post('/acquisitions', handle(AcquisitionController.store));
 
 module.exports = routes;
