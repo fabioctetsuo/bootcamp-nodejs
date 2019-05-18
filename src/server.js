@@ -1,3 +1,5 @@
+require('custom-env').env(process.env.NODE_ENV);
+
 const express = require('express');
 const mongoose = require('mongoose');
 const { ValidationError } = require('express-validation');
@@ -6,7 +8,9 @@ const Sentry = require('@sentry/node');
 
 const databaseConfig = require('./config/database');
 const routes = require('./routes');
-const { secrets: { sentry } } = require('./config/secrets');
+const {
+  secrets: { sentry },
+} = require('./config/secrets');
 
 class App {
   constructor() {
@@ -45,7 +49,8 @@ class App {
     if (process.env.NODE_ENV === 'prodution') {
       this.express.use(Sentry.Handlers.errorHandler());
     }
-    this.express.use(async (error, req, res, next) => { //eslint-disable-line
+    // eslint-disable-next-line
+    this.express.use(async (error, req, res, next) => {
       const status = error.status ? error.status : 500;
       if (error instanceof ValidationError) {
         return res.status(status).json(error);

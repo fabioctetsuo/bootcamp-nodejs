@@ -4,12 +4,13 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "startDev": "nodemon src/index.js",
-    "start": "node src/index.js"
+    "startDev": "NODE_ENV=development nodemon src/index.js",
+    "start": "NODE_ENV=production node src/index.js"
   },
   "dependencies": {
     "@sentry/node": "^5.2.0",
     "bcryptjs": "^2.4.3",
+    "custom-env": "^1.0.1",
     "express": "^4.16.4",
     "express-async-handler": "^1.1.4",
     "express-handlebars": "^3.0.2",

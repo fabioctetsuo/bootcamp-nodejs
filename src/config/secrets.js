@@ -1,27 +1,27 @@
 module.exports.secrets = {
   database: {
-    project: 'gonode',
-    name: 'gonode',
-    password: 'teste',
+    project: process.env.DB_PROJECT,
+    name: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
   },
   auth: {
-    key: 'GoNode03',
+    key: process.env.AUTH_KEY,
     expiresIn: 86400,
   },
   mailer: {
-    host: 'smtp.mailtrap.io',
-    port: 2525,
+    host: process.env.MAILER_HOST,
+    port: process.env.MAILER_PORT,
     secure: false,
     auth: {
-      user: '9ad0c8f1cc51d7',
-      pass: '482a353c4bd53f',
+      user: process.env.MAILER_USER,
+      pass: process.env.MAILER_PASS,
     },
   },
   redis: {
-    host: '127.0.0.1',
-    port: 6379,
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT,
   },
   sentry: {
-    dsn: 'https://50898cb3113f44baab1315713e145b9a@sentry.io/1460686',
+    dsn: process.env.SENTRY_DSN,
   },
 };
